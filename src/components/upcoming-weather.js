@@ -1,4 +1,6 @@
-import { FlatList, Text, View } from "react-native";
+import { StatusBar } from 'expo-status-bar';
+import { FlatList, StatusBar as State, ImageBackground, Text, View, Dimensions } from "react-native";
+import { FontAwesome } from '@expo/vector-icons';
 
 const data = [
  {
@@ -54,12 +56,19 @@ const data = [
 export function Item(props) {
     const { dt, main, name, description } = props;
     return (
-        <View style={styles.container}>
-            <Text style={styles.header}>{dt}</Text>
-            <Text>{name}</Text>
-            <Text>{main.temp_min}</Text>
-            <Text>{main.temp_max}</Text>
-            <Text>{description}</Text>
+        <View style={styles.item}>
+            <FontAwesome name="sun-o" size={82} color="#A31621" />
+            <View style={styles.containerWrapper}>
+                <Text style={styles.id}>{dt}</Text>
+                <View>
+                    <Text style={styles.info}>{name}</Text>
+                    <Text style={styles.info}>{description}</Text>
+                </View>
+                <View style={styles.tempWrapper}>
+                    <Text style={styles.temp}>{main.temp_min}</Text>
+                    <Text style={styles.temp}>{main.temp_max}</Text>
+                </View>
+            </View>
         </View>
     )
 }
@@ -67,10 +76,23 @@ export function Item(props) {
 export default function UpcomingWeather() {
     return (
         <View styles={styles.container}>
-            <Text style={styles.header}>CurrentWeather</Text>
-            <FlatList data={data} renderItem={({item}) => (
-                <Item dt={item.dt} main={item.main} name={item.name} weather={item.weather.description} />
-            )} />
+            <ImageBackground 
+                resizeMode='cover' 
+                source={require('../../assets/swiss.jpg')} 
+                style={styles.image}>
+                <View style={{ zIndex: 10 }}>
+                    <Text style={styles.header}>Upcoming Weather</Text>
+                    <FlatList keyExtractor={(item) => item.id} data={data} renderItem={({item}) => (
+                        <Item 
+                            dt={item.dt} 
+                            main={item.main} 
+                            name={item.name} 
+                            description={item.weather[0].description} 
+                            />
+                    )} />
+                </View>
+            </ImageBackground>
+            <StatusBar style="dark" />
         </View>
     );
 }
@@ -80,10 +102,45 @@ const styles = {
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        gap: 10
+        gap: 10,
+        backgroundColor: '#d9d9',
+        margin: State.currentHeight || 0
     },
     header: {
         color: 'red',
-        fontSize: 30
+        fontSize: 30,
+        textAlign: 'center'
+    },
+    id: {
+        fontSize: 30,
+    },
+    item: {
+        padding: 20,
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        alignItems: 'center',
+        borderWidth: 1,
+        margin: 20,
+        borderRadius: 10,
+        borderColor: "#A31621"
+    },
+    containerWrapper: {
+        gap: 5,
+        justifyContent: 'center'
+    },
+    info: {
+        fontSize: 20
+    },
+    tempWrapper: {
+        flexDirection: 'row',
+        justifyContent: 'space-between'
+    },
+    temp: {
+        color: '#A31621',
+        fontSize: 20
+    },
+    image: {
+        flex: 1,
+        height: 900
     }
 }

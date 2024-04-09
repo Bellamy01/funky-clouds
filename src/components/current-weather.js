@@ -1,3 +1,4 @@
+import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 
@@ -18,6 +19,7 @@ export default function CurrentWeather() {
         <Text style={styles.description}>Its sunny</Text>
         <Text style={styles.message}>Its t-shirt perfect weather</Text>
       </View>
+      <StatusBar style='dark' />
     </View>
   );
 }
