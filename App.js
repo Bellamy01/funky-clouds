@@ -1,19 +1,30 @@
-import { SafeAreaView, StyleSheet } from 'react-native';
-import CurrentWeather from './src/components/current-weather';
-import UpcomingWeather from './src/components/upcoming-weather';
+import { ActivityIndicator, StyleSheet, View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native'
+import Tabs from './src/components/tabs'
+import useGetWeatherData from './src/utilities/get-weather-data';
 
-export default function App() {
+export default function App() {  
+  const [loading, weather, errorMsg] = useGetWeatherData();
+  console.log(loading, weather, errorMsg);
+
+  if (weather && weather.visibility) {
+    return (
+      <NavigationContainer>
+        <Tabs weather={weather} />
+      </NavigationContainer>
+    )
+  }
+
   return (
-    <SafeAreaView style={styles.wrapper}>
-      {/* <CurrentWeather/> */}
-      <UpcomingWeather/>
-    </SafeAreaView>
-  );
+    <View style={styles.container}>
+      <ActivityIndicator size="large" color="lightblue" />
+    </View>
+  )
 }
 
 const styles = StyleSheet.create({
-  wrapper: {
-    flex: 1,
-    backgroundColor: '#FEE1C7',
+  container: { 
+    flex: 1, 
+    justifyContent: 'center'
   }
-});
+})
