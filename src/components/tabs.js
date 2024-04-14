@@ -8,7 +8,7 @@ import { StyleSheet, View } from 'react-native'
 
 const Tab = createBottomTabNavigator()
 
-export default function Tabs() {
+export default function Tabs({ weather }) {
   return (
     <Tab.Navigator
       initialRouteName="Current"
@@ -17,14 +17,13 @@ export default function Tabs() {
         tabBarInactiveTintColor: 'grey',
         headerShown: false,
         tabBarStyle: {
-            paddingTop: 5,
-            backgroundColor: 'lightblue'
+          paddingTop: 5,
+          backgroundColor: 'lightblue',
         },
       }}
     >
       <Tab.Screen
         name="Current"
-        component={CurrentWeather}
         options={{
           tabBarIcon: ({ focused }) => (
             <AntDesign
@@ -32,9 +31,11 @@ export default function Tabs() {
               size={24}
               color={focused ? 'tomato' : 'grey'}
             />
-          )
+          ),
         }}
-      />
+      >
+        {() => <CurrentWeather weatherAPI={weather} />}
+      </Tab.Screen>
       <Tab.Screen
         name="Upcoming"
         component={UpcomingWeather}
@@ -45,7 +46,7 @@ export default function Tabs() {
               size={24}
               color={focused ? 'tomato' : 'grey'}
             />
-          )
+          ),
         }}
       />
       {/* <Tab.Screen
@@ -62,5 +63,5 @@ export default function Tabs() {
         }}
       /> */}
     </Tab.Navigator>
-  )
+  );
 }
