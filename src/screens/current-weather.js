@@ -2,26 +2,31 @@ import { StatusBar } from 'expo-status-bar'
 import { SafeAreaView, StyleSheet, Text, View } from 'react-native'
 import { weatherType } from '../utilities/weather-type'
 
-export default function CurrentWeather() {
+export default function CurrentWeather({ weatherAPI }) {
+  const cityData = weatherAPI.city
+  const weatherData = weatherAPI.list[0]
+  const { main: { temp, temp_min, temp_max, }, weather } = weatherData
+  const description = weather[0].description
+  const type = weather[0].main
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.mainWrapper}>
-        <Text style={styles.location}>Monaco</Text>
-        <Text style={styles.condition}>88°</Text>
-        <Text style={styles.description}>Partly Cloudy</Text>
+        <Text style={styles.location}>{cityData.name}</Text>
+        <Text style={styles.condition}>{Math.round(temp)}°</Text>
+        <Text style={styles.description}>{description}</Text>
         <View style={styles.tempWrapper}>
-          <Text style={styles.highLow}>H:89°</Text>
-          <Text style={styles.highLow}>L:89°</Text>
+          <Text style={styles.highLow}>H:{Math.round(temp_max)}°</Text>
+          <Text style={styles.highLow}>L:{Math.round(temp_min)}°</Text>
         </View>
       </View>
       <View style={styles.tipsWrapper}>
         <Text style={styles.tips}>
-          Rainy conditions from 2PM-4PM, with mostly cloudy conditions expected
-          at 3PM.
+          There will be {type}!
         </Text>
         <View style={styles.separator} />
         <Text style={styles.tips}>
-          {weatherType['Thunderstorm'].message}
+          {weatherType[type].message}
         </Text>
       </View>
       <StatusBar style="dark" />
@@ -57,7 +62,8 @@ const styles = StyleSheet.create({
   },
   description: {
     color: 'black',
-    fontSize: 20
+    fontSize: 20,
+    textTransform: "capitalize"
   },
   location: {
     color: 'black',
