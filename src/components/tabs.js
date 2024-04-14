@@ -1,19 +1,19 @@
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import { AntDesign, MaterialCommunityIcons } from '@expo/vector-icons'
-import { BlurView } from 'expo-blur'
-import City from '../screens/city'
-import CurrentWeather from '../screens/current-weather'
-import UpcomingWeather from '../screens/upcoming-weather'
-import { StyleSheet, View } from 'react-native'
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { AntDesign, MaterialCommunityIcons } from '@expo/vector-icons';
+import { BlurView } from 'expo-blur';
+import City from '../screens/city';
+import CurrentWeather from '../screens/current-weather';
+import UpcomingWeather from '../screens/upcoming-weather';
+import { StyleSheet, View } from 'react-native';
 
-const Tab = createBottomTabNavigator()
+const Tab = createBottomTabNavigator();
 
 export default function Tabs({ weather }) {
   return (
     <Tab.Navigator
       initialRouteName="Current"
       screenOptions={{
-        tabBarActiveTintColor: 'tomato',
+        tabBarActiveTintColor: 'black',
         tabBarInactiveTintColor: 'grey',
         headerShown: false,
         tabBarStyle: {
@@ -29,7 +29,7 @@ export default function Tabs({ weather }) {
             <AntDesign
               name="home"
               size={24}
-              color={focused ? 'tomato' : 'grey'}
+              color={focused ? 'black' : 'grey'}
             />
           ),
         }}
@@ -38,17 +38,18 @@ export default function Tabs({ weather }) {
       </Tab.Screen>
       <Tab.Screen
         name="Upcoming"
-        component={UpcomingWeather}
         options={{
           tabBarIcon: ({ focused }) => (
             <AntDesign
               name="clockcircleo"
               size={24}
-              color={focused ? 'tomato' : 'grey'}
+              color={focused ? 'black' : 'grey'}
             />
           ),
         }}
-      />
+      >
+        {() => <UpcomingWeather weatherAPI={weather} />}
+      </Tab.Screen>
       {/* <Tab.Screen
         name="City"
         component={City}
