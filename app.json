@@ -1,7 +1,8 @@
 {
   "expo": {
-    "name": "weather-app",
-    "slug": "weather-app",
+    "name": "Funky clouds",
+    "slug": "funky-clouds",
+    "description": "Funky clouds is a weather that tracks your weather status and provides insights.",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
