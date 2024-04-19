@@ -1,10 +1,8 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { AntDesign, MaterialCommunityIcons } from '@expo/vector-icons';
-import { BlurView } from 'expo-blur';
-import City from '../screens/city';
+import { AntDesign } from '@expo/vector-icons';
+//import City from '../screens/city';
 import CurrentWeather from '../screens/current-weather';
 import UpcomingWeather from '../screens/upcoming-weather';
-import { StyleSheet, View } from 'react-native';
 
 const Tab = createBottomTabNavigator();
 

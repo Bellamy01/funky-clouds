@@ -2,7 +2,6 @@ import React from 'react'
 import {
   FlatList,
   ImageBackground,
-  StatusBar as State,
   SafeAreaView,
   StyleSheet,
   Text,
