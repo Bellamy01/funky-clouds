@@ -1,6 +1,6 @@
 import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
-import { FontAwesome } from '@expo/vector-icons'
+import { Feather } from '@expo/vector-icons'
 import { getDayFromTimestamp } from '../utilities/functions'
 import { weatherType } from '../utilities/weather-type'
 
@@ -10,7 +10,7 @@ export default function ListItem(props) {
   return (
     <View style={container}>
       <Text style={date}>{getDayFromTimestamp(dt)}</Text>
-      <FontAwesome size={24} name={weatherType[description].icon} style={icon} />
+      <Feather size={24} name={weatherType[description].icon} style={icon} />
       {/* <Text style={{ color: 'black', fontSize: 20 }}>{description}</Text> */}
       <Text style={temp}>{Math.round(temp_min)}°</Text>
       <View style={line} />

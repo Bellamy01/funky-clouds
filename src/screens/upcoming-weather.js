@@ -18,8 +18,6 @@ export default function UpcomingWeather({ weatherAPI }) {
   const countryName = weatherAPI.city.country
   const weatherData = weatherAPI.list
 
-  console.log(weatherAPI);
-
   const renderItem = ({ item }) => (
     <ListItem
       dt={item.dt}
